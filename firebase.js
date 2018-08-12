@@ -10,10 +10,7 @@ const config = {
 };
 firebase.initializeApp(config);
 const database = firebase.database();
-console.log(`DataBase: ${database}`);
-let message;
-var ref = firebase.database().ref();
-console.log(`Ref: ${ref}`);
+const ref = firebase.database().ref();
 // database.ref('issues').push({
 //   name: 'Unable to Modify Layer2 Networks',
 //   tags: ['Layer2', 'NSX'],
@@ -34,3 +31,5 @@ ref.on(
     console.log(error);
   }
 );
+
+module.exports = (ref, database);

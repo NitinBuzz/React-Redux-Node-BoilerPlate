@@ -3,8 +3,10 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
-require('./firebase');
-var nodemailer = require('nodemailer');
+const ref = require('./firebase');
+const helper = require('./firebase_helpers');
+const nodemailer = require('nodemailer');
+const _ = require('lodash');
 
 const app = express();
 
@@ -12,6 +14,13 @@ app.use(bodyParser.json());
 
 app.get('/api/server', function(req, res) {
   res.send('Hello World! from server');
+});
+
+app.get('/api/issues', function(req, res) {
+  let issues = helper.getIssues();
+  console.log(`issues get: ${JSON.stringify(helper.getIssues())}`);
+  res.send(issues);
+  res.end();
 });
 
 app.post('/api/user', function(req, res) {
